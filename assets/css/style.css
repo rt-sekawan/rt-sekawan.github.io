@@ -267,6 +267,58 @@ nav a:hover {
   }
 }
 
+/* Live search dropdown (mis. cari warga di form user) */
+.search-box {
+  position: relative;
+}
+
+.search-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 20;
+  margin-top: -4px;
+}
+
+.search-results.active {
+  display: block;
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: var(--primary-light);
+}
+
+.search-result-empty {
+  padding: 10px;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--text-light);
+  margin: 2px 0 12px;
+}
+
 /* Modal */
 .modal {
   display: none;
