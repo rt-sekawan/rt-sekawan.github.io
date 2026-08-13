@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Jimpitan Desa - Login</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="manifest" href="manifest.json">
@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="login-container">
-    <!-- LOGO RESPONSIF - Pengganti teks "JIMPITAN DESA" -->
+    <!-- LOGO RESPONSIF -->
     <div class="logo-wrapper">
       <img src="assets/icons/icon-512x512.png" alt="Jimpitan Desa" width="512" height="512" loading="lazy">
     </div>
@@ -42,7 +42,7 @@
     <p id="error"></p>
   </div>
 
-  <!-- JAVASCRIPT KHUSUS UNTUK TOGGLE PASSWORD DAN REMEMBER ME -->
+  <!-- JAVASCRIPT UNTUK TOGGLE PASSWORD DAN REMEMBER ME -->
   <script>
     (function() {
       // =============================================
@@ -86,16 +86,15 @@
       loadSavedCredentials();
 
       // =============================================
-      // 4. SIMPAN CREDENTIALS SAAT LOGIN (TANPA SIMULASI)
+      // 4. SIMPAN CREDENTIALS SAAT SUBMIT
       // =============================================
       loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
         // Validasi kosong
         if (!username || !password) {
+          e.preventDefault();
           errorEl.textContent = 'Username dan password wajib diisi.';
           errorEl.style.color = 'var(--danger)';
           return;
@@ -117,9 +116,8 @@
         // Hapus pesan error
         errorEl.textContent = '';
         
-        // FORM SUBMIT LANJUT KE PROSES LOGIN YANG SEBENARNYA
-        // (akan diproses oleh auth.js atau file eksternal lainnya)
-        loginForm.submit();
+        // FORM AKAN DISUBMIT KE AUTH.JS
+        // (event listener di auth.js akan menangani proses login)
       });
 
       // =============================================
@@ -135,7 +133,7 @@
     })();
   </script>
 
-  <!-- FILE JS EKSTERNAL (auth.js untuk proses login sebenarnya) -->
+  <!-- FILE JS EKSTERNAL (urutan penting: api.js -> app.js -> auth.js) -->
   <script src="assets/js/api.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/auth.js"></script>
