@@ -30,7 +30,7 @@
 
       <!-- REMEMBER ME (INGAT SAYA) -->
       <div class="remember-row">
-        <input type="checkbox" id="rememberMe" checked>
+        <input type="checkbox" id="rememberMe">
         <label for="rememberMe">Ingat saya</label>
       </div>
 
@@ -42,7 +42,7 @@
     <p id="error"></p>
   </div>
 
-  <!-- JAVASCRIPT UNTUK FUNGSIONALITAS LOGIN -->
+  <!-- JAVASCRIPT KHUSUS UNTUK TOGGLE PASSWORD DAN REMEMBER ME -->
   <script>
     (function() {
       // =============================================
@@ -86,7 +86,7 @@
       loadSavedCredentials();
 
       // =============================================
-      // 4. PROSES LOGIN
+      // 4. SIMPAN CREDENTIALS SAAT LOGIN (TANPA SIMULASI)
       // =============================================
       loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -101,33 +101,25 @@
           return;
         }
 
-        // =============================================
-        // SIMULASI LOGIN (demo: admin/admin123)
-        // =============================================
-        if (username === 'admin' && password === 'admin123') {
-          errorEl.textContent = '';
-          
-          // Simpan "Ingat Saya" jika dicentang
-          if (rememberCheck.checked) {
-            try {
-              localStorage.setItem('jimpitan_remember', JSON.stringify({
-                username: username,
-                password: password
-              }));
-            } catch (_) { /* ignore */ }
-          } else {
-            // Hapus data tersimpan jika tidak dicentang
-            localStorage.removeItem('jimpitan_remember');
-          }
-
-          // Notifikasi sukses (ganti dengan redirect ke dashboard)
-          alert('✅ Login berhasil! (demo)');
-          // window.location.href = 'dashboard.html'; // UNCOMMENT jika ada halaman dashboard
-
+        // Simpan "Ingat Saya" jika dicentang
+        if (rememberCheck.checked) {
+          try {
+            localStorage.setItem('jimpitan_remember', JSON.stringify({
+              username: username,
+              password: password
+            }));
+          } catch (_) { /* ignore */ }
         } else {
-          errorEl.textContent = '❌ Username atau password salah. (demo: admin/admin123)';
-          errorEl.style.color = 'var(--danger)';
+          // Hapus data tersimpan jika tidak dicentang
+          localStorage.removeItem('jimpitan_remember');
         }
+
+        // Hapus pesan error
+        errorEl.textContent = '';
+        
+        // FORM SUBMIT LANJUT KE PROSES LOGIN YANG SEBENARNYA
+        // (akan diproses oleh auth.js atau file eksternal lainnya)
+        loginForm.submit();
       });
 
       // =============================================
@@ -143,7 +135,7 @@
     })();
   </script>
 
-  <!-- FILE JS EKSTERNAL (untuk kompatibilitas jika ada fungsi tambahan) -->
+  <!-- FILE JS EKSTERNAL (auth.js untuk proses login sebenarnya) -->
   <script src="assets/js/api.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/auth.js"></script>
