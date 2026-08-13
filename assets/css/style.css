@@ -1,4 +1,4 @@
-/* style.css - Sistem Jimpitan Desa */
+/* style.css - Sistem Jimpitan Desa (Revisi Login) */
 :root {
   --primary: #4CAF50;
   --primary-dark: #388E3C;
@@ -47,24 +47,48 @@ body {
   padding: 16px;
 }
 
-/* Login */
+/* ============================================================ */
+/* LOGIN - REVISI (logo, remember me, toggle password)          */
+/* ============================================================ */
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 30px 20px;
+  margin: 40px auto;
+  padding: 32px 24px;
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   text-align: center;
 }
 
-.login-container h1 {
-  color: var(--primary);
+/* ---- LOGO RESPONSIF (pengganti teks "JIMPITAN DESA") ---- */
+.logo-wrapper {
   margin-bottom: 20px;
-  font-size: 24px;
 }
 
-.login-container input {
+.logo-wrapper img {
+  max-width: 100%;
+  height: auto;
+  width: 180px;        /* ukuran dasar */
+  display: block;
+  margin: 0 auto;
+}
+
+/* responsif logo */
+@media (max-width: 480px) {
+  .logo-wrapper img {
+    width: 140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo-wrapper img {
+    width: 220px;
+  }
+}
+
+/* ---- FORM LOGIN ---- */
+.login-container input[type="text"],
+.login-container input[type="password"] {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -75,10 +99,10 @@ body {
   color: var(--text);
 }
 
-.login-container button {
+.login-container button[type="submit"] {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
+  margin-top: 12px;
   background: var(--primary);
   color: white;
   border: none;
@@ -87,9 +111,78 @@ body {
   cursor: pointer;
 }
 
-.login-container button:hover {
+.login-container button[type="submit"]:hover {
   background: var(--primary-dark);
 }
+
+/* ---- FIELD PASSWORD DENGAN TOMBOL TOGGLE ---- */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 44px; /* ruang untuk tombol toggle */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: var(--primary);
+}
+
+/* ---- REMEMBER ME (INGAT SAYA) ---- */
+.remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 12px 0 8px;
+  font-size: 0.95rem;
+}
+
+.remember-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.remember-row label {
+  cursor: pointer;
+  color: var(--text);
+  user-select: none;
+}
+
+/* ---- PESAN ERROR ---- */
+#error {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--danger);
+}
+
+/* ============================================================ */
+/* AKHIR BAGIAN LOGIN - REVISI                                  */
+/* ============================================================ */
 
 /* Cards */
 .card {
