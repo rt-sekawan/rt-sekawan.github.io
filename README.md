@@ -1,6 +1,3 @@
-Baik, saya update README.md dengan menambahkan informasi kontak Anda:
-
-```markdown
 # Sistem Digital Jimpitan Desa
 
 <div align="center">
