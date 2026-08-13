@@ -20,6 +20,11 @@
         <input type="text" id="nomor_rumah" placeholder="Nomor Rumah" required>
         <label>User ID (opsional)</label>
         <input type="text" id="user_id" placeholder="User ID (opsional)">
+        <label>Status</label>
+        <select id="status">
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="INACTIVE">INACTIVE</option>
+        </select>
         <button type="submit">Simpan</button>
         <button type="button" onclick="resetWargaForm()">Batal</button>
       </form>
@@ -32,6 +37,11 @@
         <tbody></tbody>
       </table>
     </div>
+
+    <nav>
+      <a href="warga.html">Data Warga</a>
+      <a href="users.html">Data User</a>
+    </nav>
 
     <button onclick="location.href='dashboard.html'">Kembali</button>
   </div>
