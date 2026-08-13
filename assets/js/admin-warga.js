@@ -30,6 +30,7 @@ function editWarga(warga_id) {
   document.getElementById('nama').value = warga.nama || '';
   document.getElementById('nomor_rumah').value = warga.nomor_rumah || '';
   document.getElementById('user_id').value = warga.user_id || '';
+  document.getElementById('status').value = warga.status || 'ACTIVE';
   window.scrollTo(0, 0);
 }
 
@@ -44,7 +45,8 @@ document.getElementById('wargaForm').addEventListener('submit', async (e) => {
     warga_id: document.getElementById('warga_id').value,
     nama: document.getElementById('nama').value,
     nomor_rumah: document.getElementById('nomor_rumah').value,
-    user_id: document.getElementById('user_id').value
+    user_id: document.getElementById('user_id').value,
+    status: document.getElementById('status').value
   };
   let res;
   if (data.warga_id) {
