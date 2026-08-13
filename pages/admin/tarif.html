@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Tarif</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Kelola Tarif</h2>
+    
+    <div class="card">
+      <h3>Tambah Tarif Baru</h3>
+      <label>Tanggal Aktif</label>
+      <input type="date" id="tanggalAktif">
+      
+      <label>Nominal</label>
+      <input type="number" id="nominal" min="0">
+      
+      <button onclick="createTarif()">Simpan</button>
+    </div>
+    
+    <div class="card">
+      <h3>Daftar Tarif</h3>
+      <table id="tarifTable">
+        <thead>
+          <tr><th>Tanggal Aktif</th><th>Nominal</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <button onclick="location.href='dashboard.html'">Kembali</button>
+  </div>
+  
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/admin-tarif.js"></script>
+</body>
+</html>
