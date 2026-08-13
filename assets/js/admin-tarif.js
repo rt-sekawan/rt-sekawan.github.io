@@ -5,7 +5,7 @@ async function createTarif() {
     nominal: parseFloat(document.getElementById('nominal').value)
   };
   
-  if (!data.tanggal_aktif || !data.nominal) {
+  if (!data.tanggal_aktif || isNaN(data.nominal) || data.nominal < 0) {
     showAlert('Isi tanggal dan nominal', 'warning');
     return;
   }

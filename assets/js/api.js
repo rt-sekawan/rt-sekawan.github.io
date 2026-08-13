@@ -26,7 +26,7 @@ async function callApi(action, params = {}, method = 'GET') {
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'text/plain;charset=utf-8'
       },
       body: JSON.stringify(body)
     });

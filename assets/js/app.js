@@ -68,3 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const theme = localStorage.getItem('theme') || 'light';
   document.body.setAttribute('data-theme', theme);
 });
+
+// Register service worker (PWA offline support)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    const swPath = window.location.pathname.includes('/pages/') ? '../../service-worker.js' : 'service-worker.js';
+    navigator.serviceWorker.register(swPath).catch(err => {
+      console.warn('Service worker registration failed:', err);
+    });
+  });
+}

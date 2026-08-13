@@ -22,7 +22,7 @@ async function loadDashboard() {
     const upcoming = jadwal.data.filter(j => new Date(j.tanggal) >= today).slice(0, 10);
     for (const j of upcoming) {
       const li = document.createElement('li');
-      li.textContent = `${j.tanggal.toLocaleDateString()} - ${j.nama_snapshot} (${j.status})`;
+      li.textContent = `${formatTanggal(j.tanggal)} - ${j.nama_snapshot} (${j.status})`;
       list.appendChild(li);
     }
   }
