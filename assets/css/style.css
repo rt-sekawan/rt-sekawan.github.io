@@ -33,18 +33,27 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   max-width: 600px;
   margin: 0 auto;
   padding: 16px;
+  width: 100%;
 }
 
 /* ============================================================ */
@@ -52,6 +61,7 @@ body {
 /* ============================================================ */
 .login-container {
   max-width: 400px;
+  width: 100%;
   margin: 40px auto;
   padding: 32px 24px;
   background: var(--card-bg);
@@ -68,7 +78,7 @@ body {
 .logo-wrapper img {
   max-width: 100%;
   height: auto;
-  width: 180px;        /* ukuran dasar */
+  width: 180px;
   display: block;
   margin: 0 auto;
 }
@@ -77,6 +87,10 @@ body {
 @media (max-width: 480px) {
   .logo-wrapper img {
     width: 140px;
+  }
+  .login-container {
+    padding: 24px 16px;
+    margin: 20px auto;
   }
 }
 
@@ -88,7 +102,12 @@ body {
 
 /* ---- FORM LOGIN ---- */
 .login-container input[type="text"],
-.login-container input[type="password"] {
+.login-container input[type="password"],
+.login-container input[type="email"],
+.login-container input[type="number"],
+.login-container input[type="date"],
+.login-container select,
+.login-container textarea {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -97,6 +116,8 @@ body {
   font-size: 16px;
   background: var(--bg);
   color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .login-container button[type="submit"] {
@@ -109,6 +130,8 @@ body {
   border-radius: var(--radius);
   font-size: 16px;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .login-container button[type="submit"]:hover {
@@ -123,7 +146,7 @@ body {
 
 .password-field input {
   width: 100%;
-  padding-right: 44px; /* ruang untuk tombol toggle */
+  padding-right: 44px;
 }
 
 .toggle-password {
@@ -142,6 +165,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .toggle-password:hover {
@@ -165,6 +190,29 @@ body {
   margin: 0;
   cursor: pointer;
   flex-shrink: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.remember-row input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.remember-row input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .remember-row label {
@@ -178,6 +226,7 @@ body {
   margin-top: 10px;
   font-size: 0.9rem;
   color: var(--danger);
+  min-height: 20px;
 }
 
 /* ============================================================ */
@@ -191,6 +240,7 @@ body {
   padding: 16px;
   margin-bottom: 16px;
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
 .card h3 {
@@ -205,6 +255,7 @@ body {
   padding: 16px;
   margin-bottom: 16px;
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
 .info p {
@@ -227,6 +278,8 @@ button {
   font-size: 14px;
   cursor: pointer;
   margin: 4px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 button:hover {
@@ -251,6 +304,7 @@ input[type="text"],
 input[type="password"],
 input[type="number"],
 input[type="date"],
+input[type="email"],
 select,
 textarea {
   width: 100%;
@@ -258,9 +312,11 @@ textarea {
   margin: 6px 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 14px;
+  font-size: 16px;
   background: var(--bg);
   color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 input:disabled {
@@ -274,12 +330,15 @@ table {
   border-collapse: collapse;
   margin: 10px 0;
   background: var(--card-bg);
+  table-layout: fixed;
 }
 
 th, td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid var(--border);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 th {
@@ -299,6 +358,7 @@ nav {
   border-radius: var(--radius);
   margin-bottom: 16px;
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
 nav a {
@@ -320,6 +380,7 @@ nav a:hover {
   padding: 12px;
   border-radius: var(--radius);
   margin: 10px 0;
+  width: 100%;
 }
 
 .alert-success {
@@ -347,22 +408,37 @@ nav a:hover {
   }
   
   table {
-    font-size: 12px;
+    font-size: 14px;
   }
   
   th, td {
-    padding: 6px;
+    padding: 8px 6px;
   }
   
   button {
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: 14px;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px; /* mencegah zoom otomatis di iOS */
+  }
+  
+  .login-container {
+    padding: 20px 16px;
+    margin: 20px auto;
   }
 }
 
 /* Live search dropdown (mis. cari warga di form user) */
 .search-box {
   position: relative;
+  width: 100%;
 }
 
 .search-results {
@@ -379,6 +455,7 @@ nav a:hover {
   overflow-y: auto;
   z-index: 20;
   margin-top: -4px;
+  width: 100%;
 }
 
 .search-results.active {
@@ -430,6 +507,7 @@ nav a:hover {
   padding: 20px;
   border-radius: var(--radius);
   max-width: 400px;
+  width: 90%;
   text-align: center;
 }
 
@@ -442,4 +520,46 @@ nav a:hover {
   nav, button, .no-print {
     display: none;
   }
+}
+
+/* Fix untuk mencegah zoom pada input di iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}
+
+/* Mencegah scroll horizontal berlebihan */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Clearfix */
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.w-100 {
+  width: 100%;
 }
