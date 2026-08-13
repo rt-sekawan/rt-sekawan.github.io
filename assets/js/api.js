@@ -1,5 +1,5 @@
 // api.js - Versi final
-const API_URL = 'https://script.google.com/macros/s/AKfycbwM0luMiUqY_AYirH4L7ZH1OmO60jVm4lFR1VTKJbmtj9oCou83mvmS1S9EV71YXRQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxJ5tgR8768gMFJ5X_OHMC-pNaFDPLvNy-_AKTu_bSMldCAWJJbtd6tVXDOyC04rqQ/exec';
 
 async function callApi(action, params = {}, method = 'GET') {
   const token = localStorage.getItem('token');
