@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard User</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Selamat datang, <span id="namaUser"></span></h2>
+    <div class="info">
+      <p>Saldo Deposit: <span id="saldoDeposit">Rp0</span></p>
+      <p>Total Hutang: <span id="totalHutang">Rp0</span></p>
+    </div>
+    <h3>Jadwal Terdekat</h3>
+    <ul id="jadwalList"></ul>
+    <button onclick="location.href='catat-jimpitan.html'">Catat Jimpitan</button>
+  </div>
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/user-dashboard.js"></script>
+</body>
+</html>

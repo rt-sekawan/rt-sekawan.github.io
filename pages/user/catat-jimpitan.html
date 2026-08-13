@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catat Jimpitan</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Catat Jimpitan</h2>
+    <label>Tanggal</label>
+    <input type="date" id="tanggal">
+    <p>Petugas: <span id="petugas">-</span></p>
+    <p id="modeInfo"></p>
+    <div>
+      <input type="text" id="search" placeholder="Cari warga...">
+      <button id="checkAll">Centang Semua</button>
+      <button id="uncheckAll">Hapus Semua</button>
+    </div>
+    <table id="wargaTable">
+      <thead>
+        <tr><th>No</th><th>Nama</th><th>Pembayaran</th><th>Deposit</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="selesaiBtn">Selesai</button>
+    <button id="ubahBtn" disabled>Ubah</button>
+  </div>
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/storage.js"></script>
+  <script src="../../assets/js/catat-jimpitan.js"></script>
+</body>
+</html>
