@@ -1,4 +1,4 @@
-// auth.js
+// auth.js 
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const username = document.getElementById('username').value;
