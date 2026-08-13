@@ -1,14 +1,43 @@
-<div class="container">
-  <h2>Data Warga</h2>
-  <form id="wargaForm">
-    <input type="hidden" id="warga_id">
-    <input type="text" id="nama" placeholder="Nama" required>
-    <input type="text" id="nomor_rumah" placeholder="Nomor Rumah" required>
-    <input type="text" id="user_id" placeholder="User ID (opsional)">
-    <button type="submit">Simpan</button>
-  </form>
-  <table id="wargaTable">
-    <thead><tr><th>ID</th><th>Nama</th><th>Rumah</th><th>Status</th><th>Aksi</th></tr></thead>
-    <tbody></tbody>
-  </table>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Warga</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Data Warga</h2>
+
+    <div class="card">
+      <h3>Tambah / Edit Warga</h3>
+      <form id="wargaForm">
+        <input type="hidden" id="warga_id">
+        <label>Nama</label>
+        <input type="text" id="nama" placeholder="Nama" required>
+        <label>Nomor Rumah</label>
+        <input type="text" id="nomor_rumah" placeholder="Nomor Rumah" required>
+        <label>User ID (opsional)</label>
+        <input type="text" id="user_id" placeholder="User ID (opsional)">
+        <button type="submit">Simpan</button>
+        <button type="button" onclick="resetWargaForm()">Batal</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Daftar Warga</h3>
+      <table id="wargaTable">
+        <thead><tr><th>ID</th><th>Nama</th><th>Rumah</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <button onclick="location.href='dashboard.html'">Kembali</button>
+  </div>
+
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/admin-warga.js"></script>
+</body>
+</html>
