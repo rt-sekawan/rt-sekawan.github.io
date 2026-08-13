@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 200" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    
+    <!-- Shadow Filter -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- ICON GROUP -->
+  <g transform="translate(25, 15)">
+    <!-- Outer Shield / Node Container -->
+    <path d="M 85 10 L 155 48 L 155 122 L 85 160 L 15 122 L 15 48 Z" fill="url(#emeraldGrad)" opacity="0.1" />
+    
+    <!-- Roof Frame (Desa / Warga) -->
+    <path d="M 35 75 L 85 32 L 135 75" fill="none" stroke="url(#emeraldGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#softShadow)" />
+    
+    <!-- Jimpitan Digital Coin -->
+    <circle cx="85" cy="72" r="20" fill="url(#goldGrad)" filter="url(#softShadow)" />
+    <text x="85" y="78" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="15" fill="#FFFFFF" text-anchor="middle">Rp</text>
+    
+    <!-- Digital Base Container (Jimpitan Collector / Cash Base) -->
+    <path d="M 50 102 Q 85 128 120 102 L 120 122 Q 85 148 50 122 Z" fill="url(#navyGrad)" filter="url(#softShadow)" />
+    
+    <!-- Offline/Online Sync Status Indicators -->
+    <circle cx="142" cy="38" r="5" fill="#10B981" />
+    <circle cx="154" cy="50" r="3" fill="#3B82F6" opacity="0.8" />
+  </g>
+
+  <!-- TYPOGRAPHY GROUP -->
+  <g transform="translate(210, 72)">
+    <!-- Main Title -->
+    <text x="0" y="28" font-family="'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif" font-weight="800" font-size="36" fill="#0F172A" letter-spacing="-0.5">
+      JIMPITAN<tspan fill="#10B981">DESA</tspan>
+    </text>
+    
+    <!-- Subtitle / System Purpose -->
+    <text x="0" y="54" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="600" font-size="13" fill="#475569" letter-spacing="2.5">
+      SISTEM DIGITAL KEUANGAN WARGA
+    </text>
+    
+    <!-- Feature / Accessibility Badge -->
+    <rect x="0" y="68" width="160" height="22" rx="6" fill="#F1F5F9" />
+    <text x="10" y="83" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="700" font-size="10" fill="#0F172A" letter-spacing="0.5">
+      ● PWA OFFLINE-READY (48H)
+    </text>
+  </g>
+</svg>
