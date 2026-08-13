@@ -1,22 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
   <title>Jimpitan Desa - Login</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+  <link rel="icon" href="assets/icons/icon-192x192.png">
+  <style>
+    /* additional tweaks for logo and password toggle */
+    .login-container {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 32px 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .logo-wrapper {
+      margin-bottom: 20px;
+    }
+    .logo-wrapper img {
+      max-width: 100%;
+      height: auto;
+      width: 180px;        /* base size, responsive */
+      display: block;
+      margin: 0 auto;
+    }
+    @media (max-width: 480px) {
+      .logo-wrapper img {
+        width: 140px;
+      }
+    }
+    @media (min-width: 768px) {
+      .logo-wrapper img {
+        width: 220px;
+      }
+    }
+    .password-field {
+      position: relative;
+      width: 100%;
+    }
+    .password-field input {
+      width: 100%;
+      padding-right: 44px; /* space for toggle button */
+    }
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .toggle-password:hover {
+      color: var(--primary);
+    }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      margin: 12px 0 8px;
+      font-size: 0.95rem;
+    }
+    .remember-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      margin: 0;
+      cursor: pointer;
+    }
+    .remember-row label {
+      cursor: pointer;
+      color: var(--text);
+      user-select: none;
+    }
+    #error {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    /* fix dark mode input bg */
+    input[type="password"], input[type="text"] {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .login-container button[type="submit"] {
+      margin-top: 12px;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
-    <h1>JIMPITAN DESA</h1>
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
+    <!-- logo responsif -->
+    <div class="logo-wrapper">
+      <img src="assets/icons/icon-512x512.png" alt="Jimpitan Desa" width="512" height="512" loading="lazy">
+    </div>
+
+    <form id="loginForm" autocomplete="on">
+      <input type="text" id="username" placeholder="Username" required autocomplete="username">
+      
+      <div class="password-field">
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <button type="button" class="toggle-password" id="togglePassword" aria-label="Tampilkan atau sembunyikan password">
+          👁️
+        </button>
+      </div>
+
+      <!-- fitur ingat saya -->
+      <div class="remember-row">
+        <input type="checkbox" id="rememberMe" checked>
+        <label for="rememberMe">Ingat saya</label>
+      </div>
+
       <button type="submit">LOGIN</button>
     </form>
-    <p id="error" style="color:red;"></p>
+    <p id="error" style="color:var(--danger); margin-top:12px;"></p>
   </div>
+
+  <script>
+    (function() {
+      // DOM refs
+      const loginForm = document.getElementById('loginForm');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const rememberCheck = document.getElementById('rememberMe');
+      const errorEl = document.getElementById('error');
+      const toggleBtn = document.getElementById('togglePassword');
+
+      // --- password toggle ---
+      toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        // ganti icon (opsional)
+        toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
+      });
+
+      // --- load saved credentials (ingat saya) ---
+      function loadSaved() {
+        try {
+          const saved = localStorage.getItem('jimpitan_remember');
+          if (saved) {
+            const data = JSON.parse(saved);
+            if (data.username && data.password) {
+              usernameInput.value = data.username;
+              passwordInput.value = data.password;
+              rememberCheck.checked = true;
+              // optional: auto login? tidak, biar user klik login
+            }
+          }
+        } catch (_) { /* ignore */ }
+      }
+      loadSaved();
+
+      // --- login submit ---
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        if (!username || !password) {
+          errorEl.textContent = 'Username dan password wajib diisi.';
+          return;
+        }
+
+        // --- simulasi login (validasi sederhana) ---
+        // di sini nanti bisa diganti dengan panggil API, tapi untuk demo kita validasi statis
+        // username: admin, password: admin123 (contoh)
+        if (username === 'admin' && password === 'admin123') {
+          errorEl.textContent = '';
+          // simpan ingat saya jika dicentang
+          if (rememberCheck.checked) {
+            try {
+              localStorage.setItem('jimpitan_remember', JSON.stringify({
+                username: username,
+                password: password
+              }));
+            } catch (_) { /* ignore */ }
+          } else {
+            // hapus data tersimpan
+            localStorage.removeItem('jimpitan_remember');
+          }
+          // redirect ke halaman utama (simulasi)
+          alert('Login berhasil! (demo)');
+          // window.location.href = 'dashboard.html'; // uncomment jika ada
+        } else {
+          errorEl.textContent = 'Username atau password salah. (demo: admin/admin123)';
+        }
+      });
+
+      // --- jika tombol login ditekan via enter, form submit sudah handle ---
+
+    })();
+  </script>
+
+  <!-- file asli tetap dipanggil untuk kompatibilitas jika ada fungsi lain -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/app.js"></script>
   <script src="assets/js/auth.js"></script>
 </body>
 </html>
