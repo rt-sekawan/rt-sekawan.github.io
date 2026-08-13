@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Laporan Keuangan</h2>
+    
+    <div class="card">
+      <label>Dari Tanggal</label>
+      <input type="date" id="startDate">
+      
+      <label>Sampai Tanggal</label>
+      <input type="date" id="endDate">
+      
+      <button onclick="loadLaporan()">Tampilkan</button>
+      <button onclick="window.print()" class="no-print">Cetak PDF</button>
+    </div>
+    
+    <div class="card" id="summaryCard">
+      <h3>Ringkasan</h3>
+      <p>Saldo Awal: <span id="saldoAwal">Rp0</span></p>
+      <p>Total Jimpitan: <span id="totalJimpitan">Rp0</span></p>
+      <p>Total Pembayaran Hutang: <span id="totalPembayaranHutang">Rp0</span></p>
+      <p>Total Deposit Masuk: <span id="totalDepositMasuk">Rp0</span></p>
+      <p>Total Tarik Kas: <span id="totalTarikKas">Rp0</span></p>
+      <p>Saldo Akhir: <span id="saldoAkhir">Rp0</span></p>
+    </div>
+    
+    <div class="card">
+      <h3>Detail Transaksi</h3>
+      <table id="detailTable">
+        <thead>
+          <tr><th>Tanggal</th><th>Jenis</th><th>Nominal</th><th>Keterangan</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <button onclick="location.href='dashboard.html'">Kembali</button>
+  </div>
+  
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/laporan.js"></script>
+</body>
+</html>
