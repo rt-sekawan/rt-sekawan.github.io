@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tarik Kas</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <button onclick="location.href='dashboard.html'">← Kembali</button>
+    </div>
+    <h2>Tarik Kas</h2>
+    
+    <div class="info">
+      <p>Saldo Kas Saat Ini: <span id="saldoKas">Rp0</span></p>
+    </div>
+    
+    <form id="tarikKasForm">
+      <label>Tanggal</label>
+      <input type="date" id="tanggal" required>
+      
+      <label>Nama Penarik/Penerima</label>
+      <input type="text" id="searchWarga" placeholder="Cari nama warga..." oninput="searchWarga()">
+      <select id="wargaSelect" required>
+        <option value="">Pilih Warga</option>
+      </select>
+      
+      <label>Deskripsi</label>
+      <textarea id="deskripsi" rows="3" placeholder="Keperluan penarikan"></textarea>
+      
+      <label>Total yang Ditarik</label>
+      <input type="number" id="jumlah" min="1" required>
+      
+      <button type="submit">Simpan</button>
+    </form>
+    
+    <h3>Riwayat Penarikan</h3>
+    <table id="riwayatTable">
+      <thead>
+        <tr><th>Tanggal</th><th>Penerima</th><th>Deskripsi</th><th>Nominal</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/tarik-kas.js"></script>
+</body>
+</html>
