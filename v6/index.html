@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jimpitan Desa - Login</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+  <link rel="icon" href="assets/icons/icon-192x192.png">
+</head>
+<body>
+  <div class="login-container">
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <img src="assets/icons/icon-512x512.png" alt="Jimpitan Desa" class="login-logo" width="512" height="512" loading="lazy">
+    </div>
+
+    <!-- FORM LOGIN -->
+    <form id="loginForm" autocomplete="on">
+      <!-- USERNAME -->
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="username" 
+          placeholder="Username" 
+          required 
+          autocomplete="username"
+          aria-label="Username"
+        >
+      </div>
+
+      <!-- PASSWORD + TOGGLE -->
+      <div class="form-group">
+        <div class="password-field">
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Password" 
+            required 
+            autocomplete="current-password"
+            aria-label="Password"
+          >
+          <button 
+            type="button" 
+            class="password-toggle-btn" 
+            id="togglePassword" 
+            aria-label="Tampilkan atau sembunyikan password"
+            title="Tampilkan/sembunyikan password"
+          >
+            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- REMEMBER ME -->
+      <div class="remember-row">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Ingat saya</label>
+      </div>
+
+      <!-- TOMBOL LOGIN -->
+      <button type="submit" class="btn-login">LOGIN</button>
+    </form>
+
+    <!-- PESAN ERROR -->
+    <p id="error" class="error-message" role="alert"></p>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    (function() {
+      // =============================================
+      // AMBIL REFERENSI ELEMEN
+      // =============================================
+      const loginForm = document.getElementById('loginForm');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const rememberCheck = document.getElementById('rememberMe');
+      const errorEl = document.getElementById('error');
+      const toggleBtn = document.getElementById('togglePassword');
+
+      // =============================================
+      // FITUR TOGGLE PASSWORD (View/Hide)
+      // =============================================
+      toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        
+        // Update aria-label
+        toggleBtn.setAttribute('aria-label', 
+          isPassword ? 'Sembunyikan password' : 'Tampilkan password'
+        );
+        
+        // Toggle class untuk styling
+        toggleBtn.classList.toggle('password-visible', !isPassword);
+      });
+
+      // =============================================
+      // LOAD SAVED CREDENTIALS (INGAT SAYA)
+      // =============================================
+      function loadSavedCredentials() {
+        try {
+          const saved = localStorage.getItem('jimpitan_remember');
+          if (saved) {
+            const data = JSON.parse(saved);
+            if (data.username && data.password) {
+              usernameInput.value = data.username;
+              passwordInput.value = data.password;
+              rememberCheck.checked = true;
+            }
+          }
+        } catch (_) {
+          // ignore error
+        }
+      }
+      loadSavedCredentials();
+
+      // =============================================
+      // SIMPAN CREDENTIALS SAAT SUBMIT
+      // =============================================
+      loginForm.addEventListener('submit', function(e) {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Validasi kosong
+        if (!username || !password) {
+          e.preventDefault();
+          errorEl.textContent = 'Username dan password wajib diisi.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        // Simpan "Ingat Saya" jika dicentang
+        if (rememberCheck.checked) {
+          try {
+            localStorage.setItem('jimpitan_remember', JSON.stringify({
+              username: username,
+              password: password
+            }));
+          } catch (_) { /* ignore */ }
+        } else {
+          localStorage.removeItem('jimpitan_remember');
+        }
+
+        // Hapus pesan error
+        errorEl.textContent = '';
+        errorEl.style.display = 'none';
+        
+        // Form akan disubmit ke auth.js
+      });
+
+      // =============================================
+      // HAPUS ERROR SAAT USER MENGETIK
+      // =============================================
+      [usernameInput, passwordInput].forEach(input => {
+        input.addEventListener('input', function() {
+          errorEl.textContent = '';
+          errorEl.style.display = 'none';
+        });
+      });
+
+    })();
+  </script>
+
+  <!-- FILE JS EKSTERNAL -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
