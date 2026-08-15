@@ -24,7 +24,7 @@
       <div class="password-field">
         <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
         <button type="button" class="toggle-password" id="togglePassword" aria-label="Tampilkan atau sembunyikan password">
-          <span class="eye-icon">👁️</span>
+          👁️
         </button>
       </div>
 
@@ -54,17 +54,27 @@
       const rememberCheck = document.getElementById('rememberMe');
       const errorEl = document.getElementById('error');
       const toggleBtn = document.getElementById('togglePassword');
-      const eyeIcon = toggleBtn.querySelector('.eye-icon');
 
       // =============================================
-      // 2. FITUR TOGGLE PASSWORD (View/Hide)
+      // 2. FITUR TOGGLE PASSWORD (View/Hide) - FIX
       // =============================================
       toggleBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        const isPassword = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-        eyeIcon.textContent = isPassword ? '🙈' : '👁️';
-        toggleBtn.setAttribute('aria-label', isPassword ? 'Sembunyikan password' : 'Tampilkan password');
+        e.stopPropagation();
+        
+        // Cek tipe password saat ini
+        const currentType = passwordInput.type;
+        
+        // Toggle type
+        if (currentType === 'password') {
+          passwordInput.type = 'text';
+          toggleBtn.textContent = '🙈';
+          toggleBtn.setAttribute('aria-label', 'Sembunyikan password');
+        } else {
+          passwordInput.type = 'password';
+          toggleBtn.textContent = '👁️';
+          toggleBtn.setAttribute('aria-label', 'Tampilkan password');
+        }
       });
 
       // =============================================
