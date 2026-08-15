@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Monitoring</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <button onclick="location.href='dashboard.html'">← Kembali</button>
+    </div>
+    <h2>Monitoring</h2>
+    
+    <div class="card">
+      <h3>Statistik Petugas</h3>
+      <table id="petugasTable">
+        <thead>
+          <tr><th>Nama</th><th>Total Jadwal</th><th>Berhasil</th><th>Absen</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <div class="card">
+      <h3>Statistik Warga</h3>
+      <table id="wargaStatsTable">
+        <thead>
+          <tr><th>Nama</th><th>Total Bayar</th><th>Total Hutang</th><th>Deposit</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/admin-monitoring.js"></script>
+</body>
+</html>

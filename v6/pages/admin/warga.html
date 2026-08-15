@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Data Warga</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <button onclick="location.href='dashboard.html'">← Kembali</button>
+    </div>
+    <h2>Data Warga</h2>
+
+    <div class="card">
+      <h3>Tambah / Edit Warga</h3>
+      <form id="wargaForm">
+        <input type="hidden" id="warga_id">
+        <label>Nama</label>
+        <input type="text" id="nama" placeholder="Nama" required>
+        <label>Nomor Rumah</label>
+        <input type="text" id="nomor_rumah" placeholder="Nomor Rumah" required>
+        <label>User ID (opsional)</label>
+        <input type="text" id="user_id" placeholder="User ID (opsional)">
+        <label>Status</label>
+        <select id="status">
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="INACTIVE">INACTIVE</option>
+        </select>
+        <button type="submit">Simpan</button>
+        <button type="button" onclick="resetWargaForm()">Batal</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Daftar Warga</h3>
+      <table id="wargaTable">
+        <thead><tr><th>ID</th><th>Nama</th><th>Rumah</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <nav>
+      <a href="warga.html">Data Warga</a>
+      <a href="users.html">Data User</a>
+    </nav>
+  </div>
+
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/admin-warga.js"></script>
+</body>
+</html>
