@@ -210,17 +210,17 @@ JIMPITAN_DB
 
 ### Tabel Utama
 
-**USERS**: user_id, username, password_hash, salt, iterations, role, warga_id, status
+**USERS**: user_id, username, password_hash, salt, iterations, role, warga_id, status, created_at, updated_at, last_login
 
 **WARGA**: warga_id, nama, nomor_rumah, user_id, status, created_at, updated_at
 
 **TARIF**: tarif_id, tanggal_aktif, nominal, created_by, created_at
 
-**JADWAL_YYYY**: jadwal_id, tanggal, warga_id, nama_snapshot, status
+**JADWAL_YYYY**: jadwal_id, tanggal, warga_id, nama_snapshot, status, created_at, updated_at
 
-**TRANSAKSI_YYYY**: transaksi_id, tanggal, waktu, warga_id, petugas_id, jenis, status, nominal, tarif_id, tarif_snapshot, debt_id, referensi_id, source_year, source_transaction_id, idempotency_key, keterangan, created_by, created_at, updated_at, version
+**TRANSAKSI_YYYY**: transaksi_id, tanggal, waktu, warga_id, nama_warga, petugas_id, nama_petugas, jenis, status, nominal, tarif_id, tarif_snapshot, debt_id, referensi_id, source_year, source_transaction_id, idempotency_key, keterangan, created_by, created_at, updated_at, version
 
-**AUDIT_LOG_YYYY**: audit_id, timestamp, user_id, action, object_type, object_id, old_value, new_value, reason
+**AUDIT_LOG_YYYY**: audit_id, timestamp, user_id, nama_user, action, object_type, object_id, old_value, new_value, reason
 
 ### Jenis Transaksi
 
@@ -263,14 +263,14 @@ JIMPITAN_DB
 1. Buka [Google Sheets](https://sheets.google.com)
 2. Buat spreadsheet baru dengan nama `JIMPITAN_DB`
 3. Buat sheet berikut:
-   - CONFIG
-   - USERS
-   - WARGA
-   - TARIF
-   - SALDO_TAHUNAN
-   - JADWAL_2026
-   - TRANSAKSI_2026
-   - AUDIT_LOG_2026
+   - `CONFIG`
+   - `USERS`
+   - `WARGA`
+   - `TARIF`
+   - `SALDO_TAHUNAN`
+   - `JADWAL_2026`
+   - `TRANSAKSI_2026`
+   - `AUDIT_LOG_2026`
 
 4. Isi header kolom sesuai [Struktur Database](#struktur-database)
 
@@ -278,24 +278,28 @@ JIMPITAN_DB
 
 1. Buka spreadsheet → **Extensions** → **Apps Script**
 2. Hapus kode default
-3. Buat file-file berikut:
-   - `Code.gs`
-   - `Utils.gs`
-   - `Auth.gs`
-   - `User.gs`
-   - `Warga.gs`
-   - `Tarif.gs`
-   - `Jadwal.gs`
-   - `Transaksi.gs`
-   - `Deposit.gs`
-   - `Hutang.gs`
-   - `Kas.gs`
-   - `Laporan.gs`
-   - `Monitoring.gs`
-   - `Tahun.gs`
-   - `Audit.gs`
+3. Buat file-file berikut dengan kode yang sesuai:
 
-4. Salin kode dari folder `backend/` di repository ini
+| File | Deskripsi |
+|------|-----------|
+| `Code.gs` | Entry point, routing semua request |
+| `Utils.gs` | Fungsi utilitas (hash, session, format tanggal) |
+| `Auth.gs` | Login, logout, validasi session |
+| `User.gs` | CRUD user, user list |
+| `Warga.gs` | CRUD warga, search warga |
+| `Tarif.gs` | CRUD tarif, get tarif aktif |
+| `Jadwal.gs` | Generate/regenerate jadwal, get jadwal |
+| `Transaksi.gs` | Save/update jimpitan, get jimpitan |
+| `Deposit.gs` | Hitung saldo deposit |
+| `Hutang.gs` | Hitung hutang, pay debt, riwayat |
+| `Kas.gs` | Hitung saldo kas, tarik kas |
+| `Laporan.gs` | Generate laporan keuangan |
+| `Monitoring.gs` | Statistik petugas dan warga |
+| `Tahun.gs` | Finalisasi tahun, backup database |
+| `Audit.gs` | Audit log, get audit log |
+| `Pengaturan.gs` | Pengaturan masa edit |
+
+4. Salin kode dari repository ini ke masing-masing file
 
 ### Langkah 3: Deploy Apps Script
 
@@ -311,16 +315,15 @@ JIMPITAN_DB
 
 1. Clone atau download repository ini
 2. Buka `assets/js/api.js`
-3. Ganti `YOUR_SCRIPT_ID` dengan ID dari URL Web App:
+3. Ganti URL dengan URL Web App Anda:
 
 ```javascript
-const API_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+const API_URL = 'https://script.google.com/macros/s/XXXX/exec';
 ```
 
-### Langkah 5: Buat User Admin
+### Langkah 5: Buat User Admin Pertama
 
-1. Buka Apps Script editor
-2. Jalankan fungsi ini di editor:
+Buka Apps Script editor, jalankan fungsi ini di console:
 
 ```javascript
 function createFirstAdmin() {
@@ -328,19 +331,14 @@ function createFirstAdmin() {
   const result = hashPassword(password, Utilities.getUuid(), 10000);
   console.log('Salt:', result.salt);
   console.log('Hash:', result.hash);
-  console.log('Iterations:', result.iterations);
 }
 ```
 
-3. Lihat hasil di Console
-4. Masukkan ke sheet USERS secara manual:
-   - user_id: `U-ADMIN-001`
-   - username: `admin`
-   - password_hash: (hasil hash)
-   - salt: (hasil salt)
-   - iterations: 10000
-   - role: `ADMIN`
-   - status: `ACTIVE`
+Masukkan hasil ke sheet USERS secara manual:
+
+| user_id | username | password_hash | salt | iterations | role | warga_id | status |
+|---------|----------|---------------|------|------------|------|----------|--------|
+| U-ADMIN-001 | admin | (hash) | (salt) | 10000 | ADMIN | | ACTIVE |
 
 ### Langkah 6: Hosting di GitHub Pages
 
@@ -360,11 +358,8 @@ function createFirstAdmin() {
 
 | Key | Value | Deskripsi |
 |-----|-------|-----------|
-| `nama_desa` | Desa Sukamaju | Nama desa |
-| `tarif_default` | 500 | Tarif default |
-| `session_timeout` | 6 | Timeout session (jam) |
-| `draft_retention` | 48 | Retensi draft offline (jam) |
-| `max_login_attempts` | 5 | Maksimal percobaan login |
+| `masa_edit_tipe` | `HARI` / `BULANAN` / `SELAMANYA` | Tipe masa edit untuk warga |
+| `masa_edit_nilai` | 3 | Jumlah hari/bulan (kosong jika SELAMANYA) |
 
 ### PWA Manifest
 
@@ -384,7 +379,7 @@ File `manifest.json` berisi konfigurasi PWA:
 
 ## 📱 Penggunaan
 
-### User Biasa
+### User Biasa (Warga)
 
 1. **Login** dengan username dan password
 2. **Dashboard** menampilkan saldo deposit, hutang, dan jadwal
@@ -394,8 +389,8 @@ File `manifest.json` berisi konfigurasi PWA:
 ### Bendahara
 
 1. **Dashboard** menampilkan saldo kas, total hutang, total deposit
-2. **Tarik Kas** untuk pengeluaran
-3. **Bayar Hutang** dengan FIFO
+2. **Tarik Kas** untuk pengeluaran kas
+3. **Bayar Hutang** dengan metode FIFO
 4. **Laporan** untuk cetak keuangan
 
 ### Admin
@@ -449,6 +444,11 @@ File `manifest.json` berisi konfigurasi PWA:
 - Setiap tahun memiliki sheet terpisah
 - Histori tahun sebelumnya tidak diubah
 - Saldo akhir menjadi opening balance tahun berikutnya
+
+### Masa Edit (Pengaturan)
+- Admin & Bendahara: bebas edit tanggal lampau
+- Warga: hari ini selalu boleh; hari lampau hanya UPDATE (tidak bisa catat baru)
+- Warga: hari lampau di luar masa edit tidak boleh sama sekali
 
 ---
 
@@ -509,47 +509,63 @@ Jika HP mati atau browser tertutup:
 jimpitan-desa/
 │
 ├── backend/                    # Google Apps Script
-│   ├── Code.gs
-│   ├── Utils.gs
-│   ├── Auth.gs
-│   ├── User.gs
-│   ├── Warga.gs
-│   ├── Tarif.gs
-│   ├── Jadwal.gs
-│   ├── Transaksi.gs
-│   ├── Deposit.gs
-│   ├── Hutang.gs
-│   ├── Kas.gs
-│   ├── Laporan.gs
-│   ├── Monitoring.gs
-│   ├── Tahun.gs
-│   └── Audit.gs
+│   ├── Code.gs                 # Entry point
+│   ├── Utils.gs                # Utilitas
+│   ├── Auth.gs                 # Login/logout
+│   ├── User.gs                 # CRUD user
+│   ├── Warga.gs                # CRUD warga
+│   ├── Tarif.gs                # CRUD tarif
+│   ├── Jadwal.gs               # Generate jadwal
+│   ├── Transaksi.gs            # Jimpitan
+│   ├── Deposit.gs              # Deposit
+│   ├── Hutang.gs               # Hutang & pembayaran
+│   ├── Kas.gs                  # Kas & tarik kas
+│   ├── Laporan.gs              # Laporan
+│   ├── Monitoring.gs           # Monitoring
+│   ├── Tahun.gs                # Finalisasi tahun
+│   ├── Audit.gs                # Audit log
+│   └── Pengaturan.gs           # Pengaturan masa edit
 │
 ├── frontend/                   # GitHub Pages
-│   ├── index.html
-│   ├── manifest.json
-│   ├── service-worker.js
+│   ├── index.html              # Halaman login
+│   ├── manifest.json           # PWA manifest
+│   ├── service-worker.js       # Service worker
 │   ├── assets/
 │   │   ├── css/
-│   │   │   └── style.css
+│   │   │   └── style.css       # Styling global
 │   │   ├── js/
-│   │   │   ├── api.js
-│   │   │   ├── auth.js
-│   │   │   ├── app.js
-│   │   │   ├── storage.js
+│   │   │   ├── api.js          # API caller
+│   │   │   ├── auth.js         # Login handler
+│   │   │   ├── app.js          # Utilitas
+│   │   │   ├── storage.js      # IndexedDB
 │   │   │   └── ...
 │   │   └── icons/
 │   │       ├── icon-192x192.png
 │   │       └── icon-512x512.png
 │   └── pages/
-│       ├── user/
-│       ├── bendahara/
-│       └── admin/
+│       ├── user/               # Halaman USER
+│       │   ├── dashboard.html
+│       │   ├── catat-jimpitan.html
+│       │   └── akun.html
+│       ├── bendahara/          # Halaman BENDAHARA
+│       │   ├── dashboard.html
+│       │   ├── tarik-kas.html
+│       │   ├── hutang.html
+│       │   └── laporan.html
+│       └── admin/              # Halaman ADMIN
+│           ├── dashboard.html
+│           ├── warga.html
+│           ├── users.html
+│           ├── jadwal.html
+│           ├── tarif.html
+│           ├── monitoring.html
+│           ├── audit-log.html
+│           └── pengaturan.html
 │
 ├── docs/                       # Dokumentasi
-│   └── SRS.md
+│   └── README.md
 │
-└── README.md
+└── LICENSE
 ```
 
 ### Prioritas Implementasi
@@ -628,13 +644,7 @@ Jika ada pertanyaan atau masalah, silakan:
 
 ---
 
-<div align="center">
 
 **Dibuat dengan ❤️ untuk kemajuan desa**
 
 **© 2026 Rizky Hanifudin, S.Kom., M.Kom.**
-
-</div>
-```
-
----
