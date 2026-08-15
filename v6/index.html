@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jimpitan Desa - Login</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+  <link rel="icon" href="assets/icons/icon-192x192.png">
+</head>
+<body>
+  <div class="login-container">
+    <img src="assets/icons/icon-512x512.png" alt="Jimpitan Desa" class="login-logo">
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required autocomplete="username">
+      <div class="password-field">
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <button type="button" id="togglePassword" class="password-toggle-btn" aria-label="Tampilkan/sembunyikan password">👁</button>
+      </div>
+      <label class="remember-me">
+        <input type="checkbox" id="rememberMe"> Ingat Saya
+      </label>
+      <button type="submit">LOGIN</button>
+    </form>
+    <p id="error" style="color:red;"></p>
+  </div>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
