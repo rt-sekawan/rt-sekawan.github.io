@@ -23,9 +23,9 @@
       <!-- FIELD PASSWORD + TOMBOL TOGGLE -->
       <div class="password-field">
         <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-        <button type="button" class="toggle-password" id="togglePassword" aria-label="Tampilkan atau sembunyikan password">
+        <span class="toggle-password" id="togglePassword" role="button" tabindex="0" aria-label="Tampilkan password">
           👁️
-        </button>
+        </span>
       </div>
 
       <!-- REMEMBER ME (INGAT SAYA) -->
@@ -41,112 +41,6 @@
     <!-- PESAN ERROR -->
     <p id="error"></p>
   </div>
-
-  <!-- JAVASCRIPT UNTUK TOGGLE PASSWORD DAN REMEMBER ME -->
-  <script>
-    (function() {
-      // =============================================
-      // 1. AMBIL REFERENSI ELEMEN
-      // =============================================
-      const loginForm = document.getElementById('loginForm');
-      const usernameInput = document.getElementById('username');
-      const passwordInput = document.getElementById('password');
-      const rememberCheck = document.getElementById('rememberMe');
-      const errorEl = document.getElementById('error');
-      const toggleBtn = document.getElementById('togglePassword');
-
-      // =============================================
-      // 2. FITUR TOGGLE PASSWORD (View/Hide) - FIX
-      // =============================================
-      toggleBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Cek tipe password saat ini
-        const currentType = passwordInput.type;
-        
-        // Toggle type
-        if (currentType === 'password') {
-          passwordInput.type = 'text';
-          toggleBtn.textContent = '🙈';
-          toggleBtn.setAttribute('aria-label', 'Sembunyikan password');
-        } else {
-          passwordInput.type = 'password';
-          toggleBtn.textContent = '👁️';
-          toggleBtn.setAttribute('aria-label', 'Tampilkan password');
-        }
-      });
-
-      // =============================================
-      // 3. FITUR INGAT SAYA (LOAD SAVED CREDENTIALS)
-      // =============================================
-      function loadSavedCredentials() {
-        try {
-          const saved = localStorage.getItem('jimpitan_remember');
-          if (saved) {
-            const data = JSON.parse(saved);
-            if (data.username && data.password) {
-              usernameInput.value = data.username;
-              passwordInput.value = data.password;
-              rememberCheck.checked = true;
-            }
-          }
-        } catch (_) {
-          // ignore
-        }
-      }
-      loadSavedCredentials();
-
-      // =============================================
-      // 4. SIMPAN CREDENTIALS SAAT SUBMIT
-      // =============================================
-      loginForm.addEventListener('submit', function(e) {
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        // Validasi kosong
-        if (!username || !password) {
-          e.preventDefault();
-          errorEl.textContent = 'Username dan password wajib diisi.';
-          errorEl.style.display = 'block';
-          return;
-        }
-
-        // Simpan "Ingat Saya" jika dicentang
-        if (rememberCheck.checked) {
-          try {
-            localStorage.setItem('jimpitan_remember', JSON.stringify({
-              username: username,
-              password: password
-            }));
-          } catch (_) { /* ignore */ }
-        } else {
-          // Hapus data tersimpan jika tidak dicentang
-          localStorage.removeItem('jimpitan_remember');
-        }
-
-        // Hapus pesan error
-        errorEl.textContent = '';
-        errorEl.style.display = 'none';
-        
-        // FORM AKAN DISUBMIT KE AUTH.JS
-        // (event listener di auth.js akan menangani proses login)
-      });
-
-      // =============================================
-      // 5. HAPUS ERROR SAAT USER MULAI MENGETIK
-      // =============================================
-      usernameInput.addEventListener('input', function() {
-        errorEl.textContent = '';
-        errorEl.style.display = 'none';
-      });
-      passwordInput.addEventListener('input', function() {
-        errorEl.textContent = '';
-        errorEl.style.display = 'none';
-      });
-
-    })();
-  </script>
 
   <!-- FILE JS EKSTERNAL (urutan penting: api.js -> app.js -> auth.js) -->
   <script src="assets/js/api.js"></script>
