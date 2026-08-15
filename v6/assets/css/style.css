@@ -1,7 +1,4 @@
-/* ============================================================
-   style.css - Sistem Jimpitan Desa (FIX FINAL)
-   ============================================================ */
-
+/* style.css - Sistem Jimpitan Desa (Revisi Login) */
 :root {
   --primary: #4CAF50;
   --primary-dark: #388E3C;
@@ -60,7 +57,7 @@ body {
 }
 
 /* ============================================================ */
-/* LOGIN SECTION - FIX FINAL                                     */
+/* LOGIN - REVISI (logo, remember me, toggle password)          */
 /* ============================================================ */
 .login-container {
   max-width: 400px;
@@ -73,35 +70,52 @@ body {
   text-align: center;
 }
 
-/* Logo */
+/* ---- LOGO RESPONSIF (pengganti teks "JIMPITAN DESA") ---- */
 .logo-wrapper {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-.login-logo {
-  width: 160px;
-  height: 160px;
+.logo-wrapper img {
+  max-width: 100%;
+  height: auto;
+  width: 180px;
   display: block;
   margin: 0 auto;
-  border-radius: 20px;
 }
 
-/* Form group */
-.form-group {
-  margin-bottom: 16px;
+/* responsif logo */
+@media (max-width: 480px) {
+  .logo-wrapper img {
+    width: 140px;
+  }
+  .login-container {
+    padding: 24px 16px;
+    margin: 20px auto;
+  }
 }
 
-/* Input fields */
+@media (min-width: 768px) {
+  .logo-wrapper img {
+    width: 220px;
+  }
+}
+
+/* ---- FORM LOGIN ---- */
 .login-container input[type="text"],
-.login-container input[type="password"] {
+.login-container input[type="password"],
+.login-container input[type="email"],
+.login-container input[type="number"],
+.login-container input[type="date"],
+.login-container select,
+.login-container textarea {
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px;
+  margin: 8px 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-size: 16px;
   background: var(--bg);
   color: var(--text);
-  transition: border-color 0.3s, box-shadow 0.3s;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -112,17 +126,37 @@ body {
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
-/* Password field dengan toggle */
+.login-container button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background 0.3s;
+}
+
+.login-container button[type="submit"]:hover {
+  background: var(--primary-dark);
+}
+
+/* ---- FIELD PASSWORD DENGAN TOMBOL TOGGLE ---- */
 .password-field {
   position: relative;
   width: 100%;
 }
 
 .password-field input {
-  padding-right: 48px;
+  width: 100%;
+  padding-right: 44px;
 }
 
-.password-toggle-btn {
+.toggle-password {
   position: absolute;
   right: 8px;
   top: 50%;
@@ -131,40 +165,39 @@ body {
   height: 36px;
   padding: 0;
   margin: 0;
-  background: none;
+  background: transparent;
   border: none;
-  cursor: pointer;
+  font-size: 20px;
   color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.2s, background 0.2s;
   border-radius: 50%;
-  transition: all 0.2s;
   -webkit-appearance: none;
   appearance: none;
 }
 
-.password-toggle-btn:hover {
-  background: rgba(0,0,0,0.05);
+.toggle-password:hover {
   color: var(--primary);
+  background: rgba(0,0,0,0.05);
 }
 
-.password-toggle-btn:focus {
+.toggle-password:focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-.password-toggle-btn.password-visible {
-  color: var(--primary);
-}
-
-/* Remember me */
+/* ---- REMEMBER ME (INGAT SAYA) ---- */
 .remember-row {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
-  margin: 16px 0;
-  font-size: 14px;
+  margin: 12px 0 8px;
+  font-size: 0.95rem;
   text-align: left;
 }
 
@@ -185,67 +218,16 @@ body {
   user-select: none;
 }
 
-/* Tombol login */
-.btn-login {
-  width: 100%;
-  padding: 14px;
-  margin-top: 8px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.1s;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.btn-login:hover {
-  background: var(--primary-dark);
-}
-
-.btn-login:active {
-  transform: scale(0.98);
-}
-
-/* Error message */
-.error-message {
-  display: none;
-  margin-top: 12px;
-  padding: 10px;
-  font-size: 14px;
+/* ---- PESAN ERROR ---- */
+#error {
+  margin-top: 10px;
+  font-size: 0.9rem;
   color: var(--danger);
-  background: rgba(244, 67, 54, 0.1);
-  border-radius: var(--radius);
-  border-left: 3px solid var(--danger);
+  min-height: 20px;
 }
 
 /* ============================================================ */
-/* RESPONSIVE LOGIN                                              */
-/* ============================================================ */
-@media (max-width: 480px) {
-  .login-container {
-    padding: 24px 16px;
-    margin: 20px auto;
-  }
-  
-  .login-logo {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-@media (min-width: 768px) {
-  .login-logo {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-/* ============================================================ */
-/* GENERAL COMPONENTS                                            */
+/* AKHIR BAGIAN LOGIN - REVISI                                  */
 /* ============================================================ */
 
 /* Cards */
@@ -295,7 +277,6 @@ button {
   margin: 4px;
   -webkit-appearance: none;
   appearance: none;
-  transition: background 0.3s;
 }
 
 button:hover {
@@ -328,7 +309,7 @@ textarea {
   margin: 6px 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 16px; /* Prevent iOS zoom */
+  font-size: 16px;
   background: var(--bg);
   color: var(--text);
   -webkit-appearance: none;
@@ -393,7 +374,6 @@ nav a {
   color: white;
   text-decoration: none;
   border-radius: var(--radius);
-  transition: background 0.3s;
 }
 
 nav a:hover {
@@ -520,12 +500,12 @@ nav a:hover {
   bottom: 0;
   background: rgba(0,0,0,0.5);
   z-index: 1000;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal.active {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
@@ -627,9 +607,7 @@ nav a:hover {
   clear: both;
 }
 
-/* ============================================================ */
-/* RESPONSIVE                                                    */
-/* ============================================================ */
+/* Responsive */
 @media (max-width: 600px) {
   .container {
     padding: 8px;
@@ -647,20 +625,23 @@ nav a:hover {
     padding: 8px 12px;
     font-size: 14px;
   }
-}
-
-/* ============================================================ */
-/* PRINT                                                         */
-/* ============================================================ */
-@media print {
-  nav, button, .no-print {
-    display: none;
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px; /* mencegah zoom otomatis di iOS */
+  }
+  
+  .login-container {
+    padding: 20px 16px;
+    margin: 20px auto;
   }
 }
 
-/* ============================================================ */
-/* FIX IOS ZOOM                                                  */
-/* ============================================================ */
+/* Fix untuk mencegah zoom pada input di iOS */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   select,
   textarea,
@@ -669,10 +650,15 @@ nav a:hover {
   }
 }
 
-/* ============================================================ */
-/* PREVENT HORIZONTAL SCROLL                                     */
-/* ============================================================ */
+/* Mencegah scroll horizontal berlebihan */
 img, video, iframe {
   max-width: 100%;
   height: auto;
+}
+
+/* Print */
+@media print {
+  nav, button, .no-print {
+    display: none;
+  }
 }
