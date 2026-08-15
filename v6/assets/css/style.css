@@ -70,7 +70,7 @@ body {
   text-align: center;
 }
 
-/* ---- LOGO RESPONSIF (pengganti teks "JIMPITAN DESA") ---- */
+/* ---- LOGO RESPONSIF ---- */
 .logo-wrapper {
   margin-bottom: 20px;
 }
@@ -118,6 +118,7 @@ body {
   color: var(--text);
   -webkit-appearance: none;
   appearance: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .login-container input:focus {
@@ -153,12 +154,12 @@ body {
 
 .password-field input {
   width: 100%;
-  padding-right: 44px;
+  padding-right: 48px;
 }
 
 .toggle-password {
   position: absolute;
-  right: 8px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
   width: 36px;
@@ -167,17 +168,21 @@ body {
   margin: 0;
   background: transparent;
   border: none;
-  font-size: 20px;
-  color: var(--text-light);
   cursor: pointer;
-  line-height: 1;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s, background 0.2s;
   border-radius: 50%;
+  transition: all 0.2s;
   -webkit-appearance: none;
   appearance: none;
+}
+
+.eye-icon {
+  font-size: 20px;
+  line-height: 1;
+  display: block;
 }
 
 .toggle-password:hover {
@@ -204,12 +209,38 @@ body {
 .remember-row input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: var(--primary);
   margin: 0;
   cursor: pointer;
   flex-shrink: 0;
-  -webkit-appearance: checkbox;
-  appearance: checkbox;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.remember-row input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.remember-row input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.remember-row input[type="checkbox"]:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .remember-row label {
@@ -220,10 +251,15 @@ body {
 
 /* ---- PESAN ERROR ---- */
 #error {
-  margin-top: 10px;
+  display: none;
+  margin-top: 12px;
+  padding: 10px;
   font-size: 0.9rem;
   color: var(--danger);
-  min-height: 20px;
+  background: rgba(244, 67, 54, 0.1);
+  border-left: 3px solid var(--danger);
+  border-radius: 4px;
+  text-align: left;
 }
 
 /* ============================================================ */
@@ -277,6 +313,7 @@ button {
   margin: 4px;
   -webkit-appearance: none;
   appearance: none;
+  transition: background 0.3s;
 }
 
 button:hover {
@@ -314,6 +351,7 @@ textarea {
   color: var(--text);
   -webkit-appearance: none;
   appearance: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input:focus,
@@ -374,6 +412,7 @@ nav a {
   color: white;
   text-decoration: none;
   border-radius: var(--radius);
+  transition: background 0.3s;
 }
 
 nav a:hover {
