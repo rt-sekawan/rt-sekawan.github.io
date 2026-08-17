@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Catat Jimpitan</title>
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
   <div class="container">
+    <div class="top-actions">
+      <button id="kembaliBtn">← Kembali</button>
+    </div>
     <h2>Catat Jimpitan</h2>
     <label>Tanggal</label>
     <input type="date" id="tanggal">
@@ -20,16 +23,34 @@
     </div>
     <table id="wargaTable">
       <thead>
-        <tr><th>No</th><th>Nama</th><th>Pembayaran</th><th>Deposit</th></tr>
+        <tr><th>No</th><th>Nama</th><th>Bayar Jimpitan Hari Ini</th><th>Saldo Deposit</th><th>Setor Deposit Baru (Rp)</th></tr>
       </thead>
       <tbody></tbody>
     </table>
+    <p class="hint" id="depositHint">💡 Kolom "Setor Deposit Baru" diisi HANYA jumlah yang dititipkan warga HARI INI (bukan total saldo). Sistem otomatis menjumlahkannya ke saldo yang sudah ada, dan kalau warga masih punya hutang jimpitan hari-hari sebelumnya, setoran ini otomatis melunasi hutang itu dulu.</p>
     <button id="selesaiBtn">Selesai</button>
     <button id="ubahBtn" disabled>Ubah</button>
+
+    <div class="card" id="ringkasanCard" style="display:none;">
+      <h3>Ringkasan</h3>
+      <table class="ringkasan-table">
+        <tbody>
+          <tr><td>Total Semua Warga</td><td id="rgTotalWarga">-</td></tr>
+          <tr><td>Total Warga yang Bayar</td><td id="rgTotalBayar">-</td></tr>
+          <tr><td>Total Seharusnya Didapat</td><td id="rgSeharusnya">-</td></tr>
+          <tr><td>Tambahan Deposit</td><td id="rgDeposit">-</td></tr>
+          <tr><td>Total Hutang Jimpitan</td><td id="rgHutang">-</td></tr>
+          <tr class="ringkasan-total"><td><strong>Total Setoran Jimpitan</strong></td><td id="rgSetoran"><strong>-</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button id="unduhBuktiBtn" style="display:none;">📥 Unduh Bukti Tugas Selesai (JPG)</button>
   </div>
   <script src="../../assets/js/api.js"></script>
   <script src="../../assets/js/app.js"></script>
   <script src="../../assets/js/storage.js"></script>
+  <script src="../../assets/js/bukti-tugas.js"></script>
   <script src="../../assets/js/catat-jimpitan.js"></script>
 </body>
 </html>

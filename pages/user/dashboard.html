@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dashboard User</title>
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
   <div class="container">
+    <div class="top-actions">
+      <button onclick="logout()" class="danger">Keluar</button>
+    </div>
     <h2>Selamat datang, <span id="namaUser"></span></h2>
     <div class="info">
       <p>Saldo Deposit: <span id="saldoDeposit">Rp0</span></p>

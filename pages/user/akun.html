@@ -2,12 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Akun Saya</title>
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
   <div class="container">
+    <div class="top-actions">
+      <button onclick="location.href='dashboard.html'">← Kembali</button>
+      <button onclick="logout()" class="danger">Keluar</button>
+    </div>
     <h2>Akun Saya</h2>
     
     <div class="card">
@@ -37,8 +41,6 @@
       <h3>Pengaturan Tampilan</h3>
       <button onclick="toggleTheme()">☀/🌙 Ganti Tema</button>
     </div>
-    
-    <button onclick="logout()" class="danger">Logout</button>
   </div>
   
   <script src="../../assets/js/api.js"></script>
