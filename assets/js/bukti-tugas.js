@@ -41,6 +41,56 @@ function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
   return y + lineHeight;
 }
 
+// Fungsi untuk menggambar logo dengan aspect ratio yang benar dan background
+async function drawLogoWithBackground(ctx, logoPath, centerX, centerY, maxWidth, maxHeight) {
+  try {
+    const logo = await loadImagePromise(logoPath);
+    
+    // Resolusi asli logo: 405x150
+    const aspectRatio = logo.width / logo.height; // 405/150 = 2.7
+    
+    // Tentukan ukuran logo dengan menjaga aspect ratio
+    let logoWidth, logoHeight;
+    
+    if (maxWidth / maxHeight > aspectRatio) {
+      // Batasan oleh tinggi
+      logoHeight = maxHeight;
+      logoWidth = maxHeight * aspectRatio;
+    } else {
+      // Batasan oleh lebar
+      logoWidth = maxWidth;
+      logoHeight = maxWidth / aspectRatio;
+    }
+    
+    // Tambahkan padding untuk background
+    const padding = 20;
+    const bgWidth = logoWidth + padding * 2;
+    const bgHeight = logoHeight + padding * 2;
+    const bgX = centerX - bgWidth / 2;
+    const bgY = centerY - bgHeight / 2;
+    
+    // Gambar background putih dengan border radius
+    ctx.fillStyle = '#ffffff';
+    drawRoundedRect(ctx, bgX, bgY, bgWidth, bgHeight, 10);
+    ctx.fill();
+    
+    // Tambahkan border subtle
+    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+    ctx.lineWidth = 2;
+    drawRoundedRect(ctx, bgX, bgY, bgWidth, bgHeight, 10);
+    ctx.stroke();
+    
+    // Gambar logo dengan ukuran yang sudah disesuaikan
+    const logoX = centerX - logoWidth / 2;
+    const logoY = centerY - logoHeight / 2;
+    ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+    
+  } catch (e) {
+    // Kalau logo gagal dimuat, lanjut tanpa logo (jangan sampai gagal total)
+    console.warn('Logo gagal dimuat:', e);
+  }
+}
+
 /**
  * info = {
  *   namaPetugas, tanggalLengkap, jam,
@@ -62,14 +112,15 @@ async function generateBuktiTugasImage(info) {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, W, H);
 
-  // Logo (di posisi tengah/center atas)
-  try {
-    const logo = await loadImagePromise(info.logoPath);
-    const logoSize = 180;
-    ctx.drawImage(logo, (W - logoSize) / 2, 90, logoSize, logoSize);
-  } catch (e) {
-    // Kalau logo gagal dimuat, lanjut tanpa logo (jangan sampai gagal total)
-  }
+  // Logo (di posisi tengah/center atas) dengan aspect ratio yang benar
+  await drawLogoWithBackground(
+    ctx, 
+    info.logoPath, 
+    W / 2, // centerX
+    180,   // centerY (posisi vertikal tengah logo)
+    300,   // maxWidth
+    120    // maxHeight
+  );
 
   // Kartu putih besar di tengah, tempat semua teks rincian
   const cardX = 70, cardY = 320, cardW = W - 140, cardH = 1380;
