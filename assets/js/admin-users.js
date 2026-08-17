@@ -23,7 +23,7 @@ function renderUserTable(list) {
     tr.innerHTML = `
       <td>${u.username}</td>
       <td>${u.warga_nama || '-'}</td>
-      <td>${u.role}</td>
+      <td>${roleLabel(u.role)}</td>
       <td>${u.status}</td>
       <td>${u.last_login ? formatTanggal(u.last_login) : '-'}</td>
       <td><button type="button" onclick="editUserById('${u.user_id}')">Edit</button></td>

@@ -31,7 +31,7 @@ function searchWarga() {
   const keyword = document.getElementById('searchWarga').value.toLowerCase();
   const filtered = allWarga.filter(w => 
     w.nama.toLowerCase().includes(keyword) || 
-    w.nomor_rumah.includes(keyword)
+    String(w.nomor_rumah).includes(keyword)
   );
   populateSelect(filtered);
 }

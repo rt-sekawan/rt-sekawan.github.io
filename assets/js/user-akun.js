@@ -4,9 +4,9 @@ async function loadAkun() {
   if (!user) return;
   
   document.getElementById('namaUser').textContent = user.username || '-';
-  document.getElementById('roleUser').textContent = user.role || '-';
+  document.getElementById('roleUser').textContent = roleLabel(user.role) || '-';
   
-  // Ambil data warga
+  // Ambil data warga (diri sendiri)
   const wargaResult = await callApi('getWarga', {});
   if (wargaResult.success) {
     const warga = wargaResult.data.find(w => w.warga_id === user.warga_id);
@@ -39,8 +39,15 @@ async function loadAkun() {
     
     for (const j of userJadwal) {
       const tr = document.createElement('tr');
-      const statusText = j.status === 'COMPLETED' || j.status === 'SELESAI' ? 'Berhasil' : 
-                         j.status === 'ABSENT' ? 'Absen' : 'Terjadwal';
+      // Nilai status jadwal yang sebenarnya: TERJADWAL / TERLAKSANA / ABSEN
+      // (bug lama: kode ini cek 'COMPLETED'/'SELESAI'/'ABSENT' yang tidak
+      // pernah cocok, jadi riwayat selalu tampil "Terjadwal").
+      const statusText = j.status === 'TERLAKSANA' ? 'Berhasil' :
+                         j.status === 'ABSEN' ? 'Absen' : 'Terjadwal';
+      // Highlight baris sesuai status: kuning=terjadwal, merah=absen, hijau=berhasil
+      const rowClass = j.status === 'TERLAKSANA' ? 'row-berhasil' :
+                        j.status === 'ABSEN' ? 'row-absen' : 'row-terjadwal';
+      tr.className = rowClass;
       tr.innerHTML = `<td>${formatTanggal(j.tanggal)}</td><td>${statusText}</td>`;
       tbody.appendChild(tr);
     }
