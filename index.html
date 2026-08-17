@@ -1,13 +1,118 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- ==================== META DASAR ==================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>E-Jimpitan - Masuk</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- ==================== TITLE & DESKRIPSI ==================== -->
+  <title>E-Jimpitan - Sistem Digital Jimpitan Dusun | Masuk</title>
+  <meta name="description" content="E-Jimpitan adalah sistem digital untuk pencatatan jimpitan, hutang, deposit, jadwal petugas, kas, dan laporan keuangan Dusun. Mudah, cepat, dan transparan.">
+  <meta name="keywords" content="jimpitan, iuran Dusun, jimpitan digital, sistem jimpitan, e-jimpitan, pencatatan jimpitan, hutang warga, deposit warga, jadwal petugas, keuangan Dusun">
+  <meta name="author" content="Rizky Hanifudin, S.Kom., M.Kom.">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="rating" content="general">
+  <meta name="language" content="Indonesian">
+  <meta name="geo.region" content="ID">
+  <meta name="geo.placename" content="Indonesia">
+  
+  <!-- ==================== OPEN GRAPH (Facebook, LinkedIn, WhatsApp) ==================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="E-Jimpitan - Sistem Digital Jimpitan Dusun">
+  <meta property="og:description" content="Sistem digital untuk pencatatan jimpitan, hutang, deposit, jadwal petugas, kas, dan laporan keuangan Dusun. Mudah, cepat, dan transparan.">
+  <meta property="og:url" content="https://rt-sekawan.github.io/jimpitan/">
+  <meta property="og:image" content="https://rt-sekawan.github.io/jimpitan/assets/icons/icon-512x512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:site_name" content="E-Jimpitan">
+  <meta property="og:locale" content="id_ID">
+  
+  <!-- ==================== TWITTER CARD ==================== -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="E-Jimpitan - Sistem Digital Jimpitan Dusun">
+  <meta name="twitter:description" content="Sistem digital untuk pencatatan jimpitan, hutang, deposit, jadwal petugas, kas, dan laporan keuangan Dusun.">
+  <meta name="twitter:image" content="https://rt-sekawan.github.io/jimpitan/assets/icons/icon-512x512.png">
+  <meta name="twitter:image:alt" content="Logo E-Jimpitan">
+  
+  <!-- ==================== PWA MANIFEST ==================== -->
   <link rel="manifest" href="manifest.json">
+  
+  <!-- ==================== THEME COLOR ==================== -->
   <meta name="theme-color" content="#4CAF50">
-  <link rel="icon" href="assets/icons/icon-192x192.png">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1B5E20">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#4CAF50">
+  
+  <!-- ==================== ICONS & FAVICON ==================== -->
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-512x512.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512x512.png">
+  <link rel="shortcut icon" href="assets/icons/icon-192x192.png">
+  
+  <!-- ==================== APPLE TOUCH ICON (iOS) ==================== -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="E-Jimpitan">
+  
+  <!-- ==================== MICROSOFT / WINDOWS ==================== -->
+  <meta name="msapplication-TileColor" content="#4CAF50">
+  <meta name="msapplication-TileImage" content="assets/icons/icon-192x192.png">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  <meta name="application-name" content="E-Jimpitan">
+  
+  <!-- ==================== SCHEMA.ORG JSON-LD ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "E-Jimpitan",
+    "alternateName": "Sistem Digital Jimpitan Dusun",
+    "url": "https://rt-sekawan.github.io/jimpitan/",
+    "description": "Sistem digital untuk pencatatan jimpitan, hutang, deposit, jadwal petugas, kas, dan laporan keuangan Dusun.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "softwareVersion": "5.0",
+    "author": {
+      "@type": "Person",
+      "name": "Rizky Hanifudin, S.Kom., M.Kom.",
+      "email": "rizky@example.com",
+      "telephone": "+62-858-6978-8917"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR"
+    },
+    "featureList": [
+      "Pencatatan jimpitan harian",
+      "Manajemen hutang warga",
+      "Pengelolaan deposit",
+      "Jadwal petugas otomatis",
+      "Laporan keuangan",
+      "Mode offline",
+      "Audit trail"
+    ]
+  }
+  </script>
+  
+  <!-- ==================== CANONICAL URL ==================== -->
+  <link rel="canonical" href="https://rt-sekawan.github.io/jimpitan/">
+  
+  <!-- ==================== PRELOAD & PRECONNECT ==================== -->
+  <link rel="preconnect" href="https://script.google.com">
+  <link rel="dns-prefetch" href="https://script.google.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- ==================== CSS ==================== -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- ==================== PRELOAD ICONS ==================== -->
+  <link rel="preload" href="assets/icons/icon-512x512.png" as="image">
 </head>
 <body>
   <div class="login-container">
@@ -26,10 +131,10 @@
     <div id="tabMasuk">
       <form id="loginForm" autocomplete="on">
         <!-- FIELD USERNAME -->
-        <input type="text" id="username" placeholder="Nama pengguna" required autocomplete="username">
+        <input type="text" id="username" placeholder="Nama pengguna" required autocomplete="username" aria-label="Nama pengguna">
         <!-- FIELD PASSWORD + TOMBOL TOGGLE -->
         <div class="password-field">
-          <input type="password" id="password" placeholder="Kata sandi" required autocomplete="current-password">
+          <input type="password" id="password" placeholder="Kata sandi" required autocomplete="current-password" aria-label="Kata sandi">
           <span class="toggle-password" id="togglePassword" role="button" tabindex="0" aria-label="Tampilkan password">
             👁️
           </span>
@@ -43,7 +148,7 @@
         <button type="submit">Masuk</button>
       </form>
       <!-- PESAN ERROR -->
-      <p id="error"></p>
+      <p id="error" role="alert" aria-live="polite"></p>
     </div>
 
     <!-- TAB INFORMASI WARGA (publik, tanpa login) -->
