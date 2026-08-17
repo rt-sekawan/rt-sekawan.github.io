@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dashboard Admin</title>
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
   <div class="container">
+    <div class="top-actions">
+      <button onclick="logout()" class="danger">Keluar</button>
+    </div>
     <h2>Dashboard Admin</h2>
     <div class="stats">
       <p>Total Warga: <span id="totalWarga">-</span></p>
@@ -17,10 +20,13 @@
       <p>Petugas Hari Ini: <span id="petugasHariIni">-</span></p>
     </div>
     <nav>
+      <a href="../user/catat-jimpitan.html">Catat Jimpitan</a>
       <a href="warga.html">Data Warga</a>
       <a href="users.html">Data User</a>
       <a href="jadwal.html">Jadwal</a>
       <a href="tarif.html">Tarif</a>
+      <a href="hutang.html">Bayar Hutang</a>
+      <a href="pengaturan.html">Pengaturan Masa Edit</a>
       <a href="monitoring.html">Monitoring</a>
       <a href="audit-log.html">Audit Log</a>
       <a href="akun.html">Akun</a>

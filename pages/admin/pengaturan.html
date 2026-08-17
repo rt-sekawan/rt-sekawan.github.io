@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pengaturan Masa Edit</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <button onclick="location.href='dashboard.html'">← Kembali</button>
+    </div>
+    <h2>Pengaturan Masa Edit Catat Jimpitan</h2>
+    <p class="hint">
+      Menentukan berapa lama warga masih boleh MENGUPDATE catatan jimpitan hari-hari
+      yang sudah lewat (bukan membuat catatan baru). Admin & Bendahara tidak
+      terpengaruh pengaturan ini — mereka selalu bisa mencatat/mengedit kapan saja.
+    </p>
+
+    <div class="card">
+      <form id="pengaturanForm">
+        <label>Tipe Masa Edit</label>
+        <select id="tipe">
+          <option value="HARI">Berdasarkan Jumlah Hari</option>
+          <option value="BULANAN">Berdasarkan Jumlah Bulan</option>
+          <option value="SELAMANYA">Selamanya (tidak dibatasi)</option>
+        </select>
+
+        <div id="formHari" style="display:none;">
+          <label>Jumlah Hari</label>
+          <input type="number" id="nilaiHari" min="1" placeholder="Contoh: 3 (warga bisa edit 3 hari ke belakang)">
+        </div>
+
+        <div id="formBulan" style="display:none;">
+          <label>Jumlah Bulan (maksimal 12)</label>
+          <input type="number" id="nilaiBulan" min="1" max="12" placeholder="Contoh: 1 (warga bisa edit 1 bulan ke belakang)">
+        </div>
+
+        <p class="hint" id="infoSelamanya" style="display:none;">
+          Warga bisa mengedit catatan jimpitan hari apa pun tanpa batas waktu.
+        </p>
+
+        <button type="submit">Simpan Pengaturan</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../assets/js/api.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/pengaturan-edit.js"></script>
+</body>
+</html>
